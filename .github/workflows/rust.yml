@@ -1,0 +1,30 @@
+name: Build and Upload Rust Artifacts
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+          components: rustfmt, clippy
+
+      - name: Initialize Cargo
+        uses: actions-rs/cargo@v1
+
+      - name: Build in release mode
+        run: |
+          cargo build --release
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: rust-build-artifacts
+          path: target/release/
