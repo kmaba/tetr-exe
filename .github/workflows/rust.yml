@@ -17,7 +17,7 @@ jobs:
           components: rustfmt, clippy
 
       - name: Initialize Cargo
-        uses: actions-rs/cargo@v1
+        uses: actions-rs/cargo@v1.1.0  # Update this to the latest version
 
       - name: Build in release mode
         run: |
